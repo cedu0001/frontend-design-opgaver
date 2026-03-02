@@ -4,21 +4,28 @@
     .content>*+* {
         margin-top: .25rlh;
     }
+
 }
 
+ /* 1. **Kort uden billede** */
+.card:not(:has(img)) h3{
+    font-size: 1.6rem;
+} 
 
+/* 2. **Kort, der hverken har et billede eller en overskrift**   */
+.card:not(:has(img)):not(:has(h3)) p{
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
 
+/* 3. **Kort med billede** */
+.card:has(img){
+    padding: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
+.card:has(img) .content{
+    padding: 1rem;
+}
 
 @layer reset, cards;
 
@@ -47,7 +54,7 @@
 
     p {
         color: #334155;
-    }
+    }  
 }
 
 @layer reset {
