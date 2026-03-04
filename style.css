@@ -1,25 +1,136 @@
 .bento {
+    container-type: inline-size;
     display: grid;
     gap: var(--spacing-base);
+    grid-auto-rows: auto;
+    grid-auto-columns: 1fr 1fr 1fr;
+    gap: 20px;
+     grid-template-areas: 
+    "a a b" 
+    "c d b"
+    "c d e";
 
     .title {
+
         --bg: var(--color-brand-yellow);
+        grid-area: a;
     }
 
     .list {
         --bg: var(--color-brand-coffee);
+        grid-area: d;
+        display: grid;
+        color: white;
+
+        > ul{
+            display: grid;
+            place-self: center center;
+            font-size: clamp(1.45rem, 6cqw, 2.4rem);
+        }
+
+        .highlight{
+            color: var(--color-brand-yellow);
+        }
+
     }
 
     .image-1 {
         color: var(--color-text-accent);
+        grid-area: b;
+    }
+
+     .image-2 {
+        grid-area: c;
+        display: grid;
+        place-self: stretch;
+        object-fit: cover;
     }
 
     .tag {
         --bg: var(--color-brand-olive);
         font-size: 2rem;
         line-height: 1.2;
+        grid-area: e;
+        font-weight: 600;
     }
+
 }
+
+@container (width < 700px){
+     .card.title {
+    display: grid;
+    grid-template-areas:
+      "brewbolt"
+      "h2"
+      "description";
+    grid-template-rows: auto auto auto;
+  }
+ 
+  .card.title > div {
+    display: contents; /* Gør, at div'en ikke opretter et grid-item */
+  }
+ 
+  .card.title h2 {
+    grid-area: h2;
+  }
+ 
+  .card.title p:first-of-type {
+    grid-area: brewbolt;
+  }
+ 
+  .card.title p:last-of-type {
+    grid-area: description;
+  }
+ 
+  .card.list {
+    padding: 2rem;
+  }
+}
+
+
+    @media (max-width: 700px) {
+    .bento{
+    display: grid;
+    grid-template-areas: 
+    "a a" 
+    "b c"
+    "b c"
+    "d e";
+        }
+    }
+
+    .title{
+      display: grid;
+    div:has(p) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+  }
+    }
+
+.image-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+ 
+  > p {
+    text-align: center;
+    margin: 15px;
+  }
+  img {
+    grid-row: 1 / 7;
+    grid-column: 1;
+  }
+  :nth-child(2) {
+    place-self: center stretch;
+    grid-row: 1;
+    grid-column: 1;
+  }
+  :nth-child(3) {
+    place-self: center stretch;
+    grid-row: 6;
+    grid-column: 1;
+  }
+}
+ 
 
 .card {
     border-radius: var(--border-radius);
@@ -32,7 +143,7 @@
 }
 
 h2 {
-    font-size: 4rem;
+    font-size: 4rem; 
     line-height: 1.1;
     color: var(--color-text-dark);
     margin-bottom: var(--spacing-base);
@@ -73,3 +184,4 @@ h2 {
         --spacing-large: 40px;
     }
 }
+
