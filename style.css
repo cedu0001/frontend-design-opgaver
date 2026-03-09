@@ -14,3 +14,138 @@
 body {
     font-family: system-ui, sans-serif;
 }
+
+/* Start med en article-wrapper:
+
+    læsebredde
+    centreret layout
+    grundlæggende flow-spacing */
+
+
+article {
+  --measure: 68ch;
+  --flow-space: 1em;
+  --text-strong: var(--gray-900);
+  --text: var(--gray-700);
+  --text-muted: var(--gray-500);
+
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  padding: var(--space-l, 2rem) var(--space-m, 1rem);
+  color: var(--text);
+
+  line-height: 1.5;
+}
+
+article > * + * {
+  margin-block-start: var(--flow-space);
+}
+
+article :is(h1, h2, h3, h4) {
+  color: var(--text-strong);
+}
+
+
+/* Definér en typografisk skala som tokens (fx --step-*)
+    brug den på h1-h4, brødtekst, lead og small tekst */
+
+:root {
+  --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
+  --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
+  --step-0: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
+  --step-2: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
+  --step-3: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
+  --step-4: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
+}
+
+
+article{
+
+    h1 {
+    font-size: var(--step-4);
+    color: var(--text-strong);
+    line-height: 1.08;
+    }
+
+    h2 {
+    font-size: var(--step-3);
+    color: var(--text-strong);
+    line-height: 1.15;
+    }
+
+    h3 {
+    font-size: var(--step-2);
+    color: var(--text-strong);
+    line-height: 1.2;
+    }
+
+    h4 {
+    font-size: var(--step-1);
+    color: var(--text-strong);
+    line-height: 1.2;
+    }
+
+    p {
+    font-size: var(--step-0);
+    color: var(--text);
+    line-height: 1.45;
+    }
+
+    figcaption {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    line-height: 1.3;
+    }
+
+    .text-small{
+    font-size: var(--step--2);
+    color: var(--color-text-muted);
+    line-height: 1.3;
+    }
+
+
+   /*  p + h2{
+    --flow-space: 1rlh;
+    } */
+
+}
+
+
+/* Definér en spacing-skala (fx --space-*)
+    brug den til både wrapper-padding og vertikal spacing 
+    
+    (se linje 36?)
+
+    */
+
+
+
+/* Indfør gråtonehierarki
+
+    overskrifter mørkere
+    brødtekst lidt lysere
+    småtekst/figcaption endnu lettere (men stadig læsbar) 
+    
+    se linje 63-100 ish
+    */
+
+
+/* Finjustér line-height
+    ikke kun globalt, men bevidst for overskrifter og brødtekst 
+
+    se linje 63-100 ish
+    */
+
+/* Tilføj nabo-regler (adjacency)
+
+    fx p + h2, h2 + h3, figure + h2
+    så spacing føles gennemtænkt og ikke “ens overalt” */
+
+
+
+/* Style tekstnære elementer
+
+    links
+    inline code
+    figure og figcaption */
