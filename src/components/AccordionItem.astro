@@ -8,6 +8,7 @@ const { id, question, answer, linkBlock } = props;
   <summary>
     <span>
       {question}
+      <PlusIcon />
     </span>
   </summary>
   <div class="answer">
@@ -23,11 +24,20 @@ const { id, question, answer, linkBlock } = props;
 </details>
 
 <style>
+  html {
+    interpolate-size: allow-keywords;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details::details-content {
+      transition: none;
+    }
+  }
+ 
   details {
     color: hsl(190 30% 12%);
     border-bottom: 1px solid #dadada;
-
-   &::details-content {
+ 
+    &::details-content {
       opacity: 0;
       block-size: 0;
       overflow-y: clip;
@@ -36,33 +46,28 @@ const { id, question, answer, linkBlock } = props;
         content-visibility 1s allow-discrete,
         opacity 1s;
     }
+    &[open] {
+      --r: z 90deg;
+    }
  
     &[open]::details-content {
       opacity: 1;
       height: 200px;
     }
-
+ 
     summary {
       font-weight: 700;
       color: #181818;
       text-wrap: revert;
       user-select: none;
       cursor: pointer;
-
-
-  /*   &::after {
-    content: "+";
-  }
-  [open] &::after {
-    content: "-";
-  } */
-
+ 
       &::marker,
       &::-webkit-details-marker {
         content: "";
         display: none;
       }
-
+ 
       span {
         border: none;
         text-align: start;
@@ -72,40 +77,29 @@ const { id, question, answer, linkBlock } = props;
         display: flex;
         gap: 1rem;
         justify-content: space-between;
-
-
-      &::after {
-        inline-size: auto;
-        font-size: 1lh;
-        height: 1lh;
-        flex-shrink: 0;
-        content: "+";
-      }
-
-      [open] &::after {
-        content: "-";
+ 
+        svg {
+          inline-size: auto;
+          height: 1lh;
+          flex-shrink: 0;
         }
-      }   
-      
-      
-      
+      }
     }
-
+ 
     .answer {
       color: #595566;
-
+ 
       > * + * {
         margin-top: 1em;
       }
-
+ 
       :last-child {
         padding-block-end: 1rlh;
       }
-
+ 
       .link-block {
         display: block;
       }
     }
   }
-
 </style>
