@@ -8,7 +8,6 @@ const { id, question, answer, linkBlock } = props;
   <summary>
     <span>
       {question}
-      <PlusIcon />
     </span>
   </summary>
   <div class="answer">
@@ -28,12 +27,35 @@ const { id, question, answer, linkBlock } = props;
     color: hsl(190 30% 12%);
     border-bottom: 1px solid #dadada;
 
+   &::details-content {
+      opacity: 0;
+      block-size: 0;
+      overflow-y: clip;
+      transition:
+        height 1s ease-out,
+        content-visibility 1s allow-discrete,
+        opacity 1s;
+    }
+ 
+    &[open]::details-content {
+      opacity: 1;
+      height: 200px;
+    }
+
     summary {
       font-weight: 700;
       color: #181818;
       text-wrap: revert;
       user-select: none;
       cursor: pointer;
+
+
+  /*   &::after {
+    content: "+";
+  }
+  [open] &::after {
+    content: "-";
+  } */
 
       &::marker,
       &::-webkit-details-marker {
@@ -51,12 +73,22 @@ const { id, question, answer, linkBlock } = props;
         gap: 1rem;
         justify-content: space-between;
 
-        svg {
-          inline-size: auto;
-          height: 1lh;
-          flex-shrink: 0;
-        }
+
+      &::after {
+        inline-size: auto;
+        font-size: 1lh;
+        height: 1lh;
+        flex-shrink: 0;
+        content: "+";
       }
+
+      [open] &::after {
+        content: "-";
+        }
+      }   
+      
+      
+      
     }
 
     .answer {
@@ -75,4 +107,5 @@ const { id, question, answer, linkBlock } = props;
       }
     }
   }
+
 </style>
